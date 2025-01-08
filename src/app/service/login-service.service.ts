@@ -53,6 +53,11 @@ export class LoginServiceService implements OnInit {
     ))
   }
 
+  criarVeiculo(chassi: string, modelo: string, marca: string, cor: string, estado: string, armazem: string, procedencia: string){
+    debugger
+    return this.http.post<any>('http://localhost:3000/auth/create/chassi', {chassi, modelo, marca, cor, estado, armazem, procedencia})
+  }
+
   getRole() {
     return this.cookieService.get('role');
   }

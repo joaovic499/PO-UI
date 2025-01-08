@@ -33,9 +33,9 @@ export class LoginComponent {
           } else {
             this.role = TipoUsuario.USER
         }
-        debugger
         const token = this.loginService.getToken();
         const userRole = this.loginService.getUserRole(token);
+        console.log(userRole)
         alert('Login Feito com sucesso!')
         this.router.navigate(['home'])
       },

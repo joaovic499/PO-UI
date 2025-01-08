@@ -1,0 +1,25 @@
+<form [formGroup]="reactiveForm">
+  <div class="po-row">
+    <po-input class="po-lg-12" formControlName="chassi" p-icon="ph ph-identification-card" p-label="Chassi"> </po-input>
+  </div>
+
+  <div class="po-row">
+    <po-input class="po-lg-6" formControlName="modelo" p-icon="ph ph-car-profile" p-label="Modelo"> </po-input>
+    <po-input class="po-lg-6" formControlName="marca" p-icon="ph ph-markdown-logo" p-label="Marca"> </po-input>
+  </div>
+
+  <div class="po-row">
+    <po-input class="po-lg-6" formControlName="cor" p-icon="ph ph-paint-bucket" p-label="Cor"> </po-input>
+    <po-input class="po-lg-6" formControlName="estado" p-icon="ph ph-car-simple" p-label="Estado"> </po-input>
+  </div>
+
+  <div class="po-row">
+    <po-input class="po-lg-6" formControlName="armazem" p-icon="ph ph-map-pin" p-label="Armazem"> </po-input>
+    <po-input class="po-lg-6" formControlName="procedencia" p-icon="ph ph-flag" p-label="Procedencia"> </po-input>
+  </div>
+
+  <div class="po-row">
+    <po-button class="po-md-3" p-label="Salvar" [p-disabled]="!reactiveForm.valid" (click)="criarChassi()"> </po-button>
+  </div>
+</form>
+

@@ -3,14 +3,17 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PoModule } from '@po-ui/ng-components';
+import { PoModalModule, PoModule } from '@po-ui/ng-components';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { PoTemplatesModule } from '@po-ui/ng-templates';
 import { LoginComponent } from './login/login.component';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 import { PoPageLoginModule } from '@po-ui/ng-templates';
 import { HomeComponent } from './home/home.component';
+import { ClientesComponent } from './clientes/clientes.component';
+import { VeiculosComponent } from './veiculos/veiculos.component';
 
 
 
@@ -18,7 +21,9 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    ClientesComponent,
+    VeiculosComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,10 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     RouterModule.forRoot([]),
     PoTemplatesModule,
-    PoPageLoginModule
+    PoPageLoginModule,
+    FormsModule,
+    ReactiveFormsModule,
+    PoModalModule
   ],
   providers: [
     provideClientHydration()
