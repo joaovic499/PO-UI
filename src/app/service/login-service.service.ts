@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, tap } from 'rxjs';
@@ -14,14 +13,14 @@ export enum TipoUsuario {
 })
 export class LoginServiceService implements OnInit {
 
-  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
+  constructor(private http: HttpClient, private cookie: CookieService) { }
 
   public role: | undefined;
   private tipoUsuario: TipoUsuario | undefined;
 
 
   ngOnInit(): void {
-    const role = this.cookieService.get('role')
+    const role = this.cookie.get('role')
     if (role === 'ADMIN') {
       this.tipoUsuario = TipoUsuario.ADMIN
     } else {
@@ -33,12 +32,11 @@ export class LoginServiceService implements OnInit {
     return this.http.post<any>('http://localhost:3000/auth/login', {user, password}, {observe: 'response'})
     .pipe(tap(
       (res: any) => {
-        debugger
         if(res.body && res.body.token && res.body.user) {
           const token = res.body.token;
-          this.cookieService.set('token', token);
+          this.cookie.set('token', token);
           const role = this.getUserRole(token);
-          this.cookieService.set('role', role)
+          this.cookie.set('role', role)
 
           if(role === 'ADMIN') {
             this.tipoUsuario = TipoUsuario.ADMIN;
@@ -53,17 +51,17 @@ export class LoginServiceService implements OnInit {
     ))
   }
 
-  criarVeiculo(chassi: string, modelo: string, marca: string, cor: string, estado: string, armazem: string, procedencia: string){
+  criarVeiculo(chassi: string, modelo: string, marca: string, cor: string, estado: string, armazem: string, procedencia: string, userId: string){
     debugger
-    return this.http.post<any>('http://localhost:3000/auth/create/chassi', {chassi, modelo, marca, cor, estado, armazem, procedencia})
+    return this.http.post<any>('http://localhost:3000/auth/create/chassi', {chassi, modelo, marca, cor, estado, armazem, procedencia, userId})
   }
 
   getRole() {
-    return this.cookieService.get('role');
+    return this.cookie.get('role');
   }
 
   getToken() {
-    return this.cookieService.get('token');
+    return this.cookie.get('token');
   }
 
   getUserRole(token: string): string {
@@ -77,14 +75,5 @@ export class LoginServiceService implements OnInit {
 
   isUsuario(): boolean {
     return this.role === TipoUsuario.USER;
-  }
-
-  tokenValid(): boolean {
-    const token = this.cookieService.get('token');
-    if(!token){
-      return false;
-    } else {
-      return true;
-    }
   }
 }

@@ -14,6 +14,7 @@ import { PoPageLoginModule } from '@po-ui/ng-templates';
 import { HomeComponent } from './home/home.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { VeiculosComponent } from './veiculos/veiculos.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -35,7 +36,8 @@ import { VeiculosComponent } from './veiculos/veiculos.component';
     PoPageLoginModule,
     FormsModule,
     ReactiveFormsModule,
-    PoModalModule
+    PoModalModule,
+    CommonModule
   ],
   providers: [
     provideClientHydration()

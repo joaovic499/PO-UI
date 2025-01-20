@@ -1,20 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { PoPageLogin } from '@po-ui/ng-templates';
 import { PoDialogService } from '@po-ui/ng-components';
 import { LoginServiceService, TipoUsuario } from '../service/login-service.service';
 import { Router } from '@angular/router';
-import { debug } from 'console';
-
-
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
 
   private role: TipoUsuario | undefined;
+
   constructor(private loginService: LoginServiceService, private router: Router, private poDialog: PoDialogService) {}
 
   ngOnInit(): void {}
@@ -39,7 +37,7 @@ export class LoginComponent {
         alert('Login Feito com sucesso!')
         this.router.navigate(['home'])
       },
-      error: (erro) => {this.poDialog.alert({title: 'Erro de Login', message: 'Dados Inválidos!'})},
+      error: (err) => {this.poDialog.alert({title: 'Erro de Login', message: err})},
     });
   }
 
