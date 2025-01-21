@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(private router: Router, private cookie: CookieService) {}
 
   readonly menus: Array<PoMenuItem> = [
-      { label: 'Cadastro de Veículos', action: this.onClick.bind(this), icon: 'po-icon-clipboard', shortLabel: 'Cadastro' },
+      { label: 'Veículos',             action: this.onClick.bind(this), icon: 'po-icon-clipboard', shortLabel: 'Cadastro' },
       { label: 'Ajuda (Help)',         action: this.onHome.bind(this), icon: 'po-icon-help', shortLabel: 'Ajuda' },
       { label: 'Sair',                 action: this.logout.bind(this), icon: 'po-icon-exit', shortLabel: 'Sair' },
     ];

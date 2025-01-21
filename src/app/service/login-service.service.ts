@@ -3,6 +3,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, tap } from 'rxjs';
+import { Veiculos } from '../views/veiculos-views/veiculos-views.component';
 
 export enum TipoUsuario {
   'USER', 'ADMIN'
@@ -52,8 +53,11 @@ export class LoginServiceService implements OnInit {
   }
 
   criarVeiculo(chassi: string, modelo: string, marca: string, cor: string, estado: string, armazem: string, procedencia: string, userId: string){
-    debugger
     return this.http.post<any>('http://localhost:3000/auth/create/chassi', {chassi, modelo, marca, cor, estado, armazem, procedencia, userId})
+  }
+
+  getVeiculos(idUser: string): Observable<Veiculos[]> {
+    return this.http.get<Veiculos[]>(`http://localhost:300/auth/get/veiculos/${idUser}`)
   }
 
   getRole() {
@@ -62,6 +66,17 @@ export class LoginServiceService implements OnInit {
 
   getToken() {
     return this.cookie.get('token');
+  }
+
+  idDecodificado() {
+    const token = this.cookie.get('token')
+    if (!token) {
+      return null;
+    }
+
+    const decoded: any = jwtDecode(token)
+    return decoded.id
+
   }
 
   getUserRole(token: string): string {

@@ -1,0 +1,18 @@
+<po-dynamic-form
+  #dynamicForm
+  p-auto-focus="chassi"
+  [p-fields]="items"
+  [p-validate-fields]="validateFields"
+>
+</po-dynamic-form>
+
+<br />
+
+<div class="po-row">
+  <po-button
+    class="po-md-3"
+    p-label="Save"
+    (p-click)="poNotification.success('Data saved successfully!'); dynamicForm.form.reset()"
+  >
+  </po-button>
+</div>

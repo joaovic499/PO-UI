@@ -9,12 +9,15 @@ import { RouterModule } from '@angular/router';
 import { PoTemplatesModule } from '@po-ui/ng-templates';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { PoPageDynamicTableModule } from '@po-ui/ng-templates';
 
 import { PoPageLoginModule } from '@po-ui/ng-templates';
 import { HomeComponent } from './home/home.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { VeiculosComponent } from './veiculos/veiculos.component';
 import { CommonModule } from '@angular/common';
+import { VeiculosViewsComponent } from './views/veiculos-views/veiculos-views.component';
+import { VeiculosControllerComponent } from './controller/veiculos-controller/veiculos-controller.component';
 
 
 
@@ -24,7 +27,9 @@ import { CommonModule } from '@angular/common';
     LoginComponent,
     HomeComponent,
     ClientesComponent,
+    VeiculosViewsComponent,
     VeiculosComponent,
+    VeiculosControllerComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,10 +42,11 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     PoModalModule,
+    PoPageDynamicTableModule,
     CommonModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
   ],
   bootstrap: [AppComponent]
 })

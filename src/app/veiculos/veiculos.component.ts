@@ -1,15 +1,10 @@
 import { CookieService } from 'ngx-cookie-service';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { PoMenuItem  } from '@po-ui/ng-components';
+import { PoMenuItem, PoNotificationService  } from '@po-ui/ng-components';
 import { LoginServiceService } from '../service/login-service.service';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
-import { PoDialogService } from '@po-ui/ng-components';
-
-
-
-
 @Component({
   selector: 'app-veiculos',
   templateUrl: './veiculos.component.html',
@@ -20,10 +15,11 @@ export class VeiculosComponent {
   reactiveForm!: UntypedFormGroup;
 
 
-  constructor(private fb: UntypedFormBuilder, private loginService: LoginServiceService, private router: Router, private cookie: CookieService, private poDialog: PoDialogService) {
-    this.createReactiveForm()
-
-  }
+  constructor(private fb: UntypedFormBuilder, private loginService: LoginServiceService,
+              private router: Router, private cookie: CookieService, public poNotification: PoNotificationService,)
+             {
+                this.createReactiveForm()
+              }
 
   readonly menus: Array<PoMenuItem> = [
         { label: 'Cadastro de Veículos', action: this.onClick.bind(this), icon: 'po-icon-clipboard', shortLabel: 'Cadastro' },
@@ -70,11 +66,11 @@ export class VeiculosComponent {
     const idUser = this.idDecodificado();
 
     this.loginService.criarVeiculo(chassi, modelo, marca, cor, estado, armazem, procedencia, idUser).subscribe({
-      next: (res) => {
-        {this.poDialog.alert({title: 'Atenção', message: "Cadastro Feito com sucesso"})}
+      next: () => {
+        {this.poNotification.success("Cadastro Feito com sucesso"), this.poNotification.setDefaultDuration(3000)}
       },
-      error: (err) => {
-        console.error('Erro ao criar veiculo', err);
+      error: () => {
+        {this.poNotification.error("Houve um erro no cadastro de veículo")}
       },
     });
     }
